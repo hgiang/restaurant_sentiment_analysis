@@ -1,0 +1,8 @@
+library(e1071)
+memory.limit(size=2700)
+train <- read.csv("train.csv", header=TRUE)
+test <- read.csv("test.csv", header=TRUE)
+model <- NaiveBayes(label~., data=train)
+prediction<-predict(model, test[-1])
+write(prediction, file="svm.csv", ncolumns=1)
+table(prediction, test$label)
